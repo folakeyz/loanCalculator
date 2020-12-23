@@ -20,6 +20,7 @@ class Post {
     public $tintrest;
     public $tAmount;
     public $month;
+    public $id;
 
    
     
@@ -56,26 +57,27 @@ class Post {
           //Execute Query
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $id = $row['Id'];
-//       if($count > 0){
-          
-        $querys = 'SELECT * FROM ' . $this->newTable . ' WHERE UserId = ?';
-        $stmts = $this->conn->prepare($querys);
+        $uid = $this->id = $row['Id'];
+        $count = $stmt->rowCount();
+  if($count != 0){
+    
+        $query = 'SELECT * FROM '.$this->newTable.' WHERE UserId = ?';
+        $stmt = $this->conn->prepare($query);
         
         //Bind BVN
-       $stmts->bindParam(1, $id);
+       $stmt->bindParam(1, $this->id);
         
           //Execute Query
         
-        $stmts->execute();
-        $rows = $stmts->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->bvn= $this->bvn;
-        $this->Name= $rows['BusinessName'];
-        $this->amount= $rows['ApprovedLoanAmount']; 
+        $this->Name= $this->id;
+        $this->amount= $row['ApprovedLoanAmount']; 
         $this->loanTenor= "36";
         $this->loanMoratorium= "12";
         $this->intrest =  0.09 * 3;
-        $loan = $rows['ApprovedLoanAmount'];
+        $loan = str_replace(',', '', $row['ApprovedLoanAmount']);
         $i = $loan * 0.09 * 3;
         $ii = $loan * 0.04 ;
         $iii = $i - $ii;
@@ -86,7 +88,7 @@ class Post {
         $this->tAmount = $ta;
         $this->month = $ta / 24;
         
-//       }
+     }
       
     } 
 }
