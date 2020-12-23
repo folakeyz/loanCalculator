@@ -16,7 +16,7 @@ class Post {
     //Get Single Visitor
     public function single_visitor(){
           
-        $this->amount= loan;
+        $this->amount= number_format(loan);
         $this->loanTenor= "36";
         $this->loanMoratorium= "12";
        $loan = loan;
@@ -25,11 +25,11 @@ class Post {
         $ii = $loan * 0.04 ;
         $iii = $i - $ii;
         $ta= $loan + $iii;
-        $this->intrest = $i;
-        $this->upfront = $ii;   
-        $this->tintrest = $iii;
-        $this->tAmount = $ta;
-        $this->month = $ta / 24;
+        $this->intrest = number_format($i);
+        $this->upfront = number_format($ii);   
+        $this->tintrest = number_format($iii);
+        $this->tAmount = number_format($ta);
+        $this->month = number_format($ta / 24);
       
     } 
 }

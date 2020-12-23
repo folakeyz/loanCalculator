@@ -73,7 +73,7 @@ class Post {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->bvn= $this->bvn;
         $this->Name= $row['BusinessName'];
-        $this->amount= str_replace(',', '', $row['ApprovedLoanAmount']); 
+        $this->amount= number_format($row['ApprovedLoanAmount']); 
         $this->loanTenor= "36";
         $this->loanMoratorium= "12";
         $this->intrest =  0.09 * 3;
@@ -82,11 +82,11 @@ class Post {
         $ii = $loan * 0.04 ;
         $iii = $i - $ii;
         $ta= $loan + $iii;
-        $this->intrest = $i;
-        $this->upfront = $ii;   
-        $this->tintrest = $iii;
-        $this->tAmount = $ta;
-        $this->month = $ta / 24;
+        $this->intrest = number_format($i);
+        $this->upfront = number_format($ii);   
+        $this->tintrest = number_format($iii);
+        $this->tAmount = number_format($ta);
+        $this->month = number_format($ta / 24);
         
      }
       
