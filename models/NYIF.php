@@ -72,7 +72,7 @@ class Post {
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->bvn= $this->bvn;
-        $this->Name= $this->id;
+        $this->Name= $row['BusinessName'];
         $this->amount= $row['ApprovedLoanAmount']; 
         $this->loanTenor= "36";
         $this->loanMoratorium= "12";
